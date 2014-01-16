@@ -1,7 +1,7 @@
 {
   "name": "ssh-connect-prompt",
   "description": "Connect to ssh using the ssh2 module and prompt stdin for host verification, key decryption etc. Similar to what standard ssh does.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": "git://github.com/mafintosh/ssh-connect-prompt.git",
   "dependencies": {
     "once": "~1.3.0",
