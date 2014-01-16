@@ -35,7 +35,7 @@ var KNOWN_HOSTS_MAP = KNOWN_HOSTS.reduce(function(result, entry) {
 }, {});
 
 var encrypted = function(pem) {
-	return pem && pem.indexOf('ENCRYPTED') > -1;
+	return pem && pem.toString().indexOf('ENCRYPTED') > -1;
 };
 
 var oninteractive = function(c) {
