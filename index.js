@@ -40,7 +40,7 @@ var encrypted = function(pem) {
 
 var oninteractive = function(c) {
 	c.on('verify', function(key, opts, cb) {
-		process.stderr(
+		process.stderr.write(
 			'The authenticity of host \''+opts.host+'\' can\'t be established.\n'+
 			'RSA key fingerprint is '+opts.fingerprint.replace(/(..)/g, '$1:').slice(0, -1)+'.\n'
 		);
@@ -80,7 +80,7 @@ var connect = function(host, opts, cb) {
 	var key = opts.privateKey || opts.key;
 	var entry = '';
 
-	if (opts.interactive) oninteractive(c);
+	if (opts.interactive !== false) oninteractive(c);
 
 	host = host.match(/^(?:([^@]+)@)?([^:]+)(?::(\d+))?/);
 	cb = once(cb || noop);
@@ -91,7 +91,7 @@ var connect = function(host, opts, cb) {
 	opts.agent = opts.agent !== false && process.env.SSH_AUTH_SOCK;
 	opts.privateKey = key;
 
-	var knownHost = opts.knownHost !== false && KNOWN_HOSTS_MAP[opts.host];
+	var knownHost = opts.verify !== false && KNOWN_HOSTS_MAP[opts.host];
 	var listeners = c._parser.listeners('USERAUTH_SUCCESS');
 	var entry;
 	var fingerprint;
